@@ -1,0 +1,114 @@
+<div class="col-lg-4" ng-show="ui.modee === 'MAIN'" style="height: calc(100vh-100px)">
+    <div class="col-lg-12 col-xs-12" style="background-color: #007399 ;height: 145px; margin-top: 10px; margin-bottom: 10px" ng-show="ui.mode === 'MAIN&CLINTDETAIL' || 'MAIN&VARIFICATION'">
+        <div class="col-lg-6 col-xs-6 no-padding">
+            <!--            <div class="input-group" style="margin-top: 8px">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input id="doctor-input" class="form-control" ng-model="model.appointment.date" placeholder="Date" type="text" disabled>
+                        </div>-->
+            <div class="input-group" style="margin-top: 8px">
+                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                <input id="doctor-input" class="form-control" ng-model="model.appointment.location" placeholder="Location" type="text" disabled>
+            </div>
+            <center>
+                <i class="fa fa-medkit" style="font-size: 22px;margin-top:10px;color: white; ">&nbsp;Your No</i>
+                <div>
+                    <a class="zoom-fab zoom-btn-large" style="font-size: 40px">{{model.appointmentNumbers.maxAppointmentNo}}</a>
+                </div>
+            </center>
+        </div>
+        <div class="col-lg-6 col-xs-6 no-padding">
+            <!--            <div class="input-group" style="margin-top: 8px">
+                            <span class="input-group-addon"><i class="fa fa-adn"></i></span>
+                            <input id="doctor-input" class="form-control" ng-model="model.appointment.availability" placeholder="Avalability" type="text" disabled>
+                        </div>-->
+            <div class="input-group" style="margin-top: 8px">
+                <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                <input id="doctor-input" class="form-control" ng-model="model.appointment.doctor" placeholder="Doctor" type="text" disabled />
+            </div>
+            <center>
+                <i class="fa fa-medkit" style="font-size: 22px;margin-top:10px; color: white; ">&nbsp;Runing No</i>
+                <div>
+                    <a class="zoom-fab zoom-btn-large" style="font-size: 40px">{{model.appointmentNumbers.runningNo}}</a>
+                </div>
+            </center>
+        </div>
+
+    </div>
+    <div class="col-xs-12" style="background-color: #009688;height: 50px;padding-top: 5px;padding-bottom: 5px;margin-bottom: 10px">
+        <center>
+            <table>
+                <th ng-repeat="notAllocateAppointment in model.notAllocateList| filter:model.search.name | orderBy:'indexNo'">
+                    <div>
+                        <a class="zoom-fab-small zoom-btn-small" ng-click="ui.getSelectNotAllocateNo(notAllocateAppointment, $index)" style="font-size: 40px">{{notAllocateAppointment.appointmentNo}}</a>&nbsp;&nbsp;
+                    </div>
+                </th>
+            </table>
+        </center> 
+    </div>
+
+    <div class="col-xs-12" ng-show="ui.mode === 'MAIN&CLINTDETAIL'">
+        <div class="no-padding">
+            <div class="form-group" style="padding-top: 20px">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                    <input class="form-control" type="text" maxlength="10" placeholder="Mobile No" ng-model="model.client.mobile" 
+                           uib-typeahead="client.mobile as (client.mobile + '  -  ' + client.name) for client in model.clientList |filter:$viewValue|limitTo:10" 
+                           typeahead-on-select="ui.getSelectedClientDetails(model.client.mobile)">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input class="form-control" type="text" placeholder="Name" ng-model="model.client.name">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                    <input class="form-control" type="text" placeholder="City" ng-model="model.client.address">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-lg btn-block" ng-click="ui.varificationCode()" style="background-color: #007399; padding-top: 10px; color: white">Submit</button>
+        </div>
+    </div>
+    <div class="col-xs-12" style="padding-top: 50px;" ng-show="ui.mode === 'MAIN&VARIFICATION'">
+        <div class="no-padding">
+            <p>We send VERIFICATION CODE your mobile please check and put it</p>
+            <div class="form-group" style="padding-top: 10px;">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                    <input class="form-control" type="text" placeholder="Verification Code XXXX" ng-model="model.appointmentDetail.verificationCode">
+                    <a class="input-group-addon ui-action-popover" ><i class="fa fa-toggle-down"></i></a>
+                </div>
+            </div>
+            <div col-xs-12>
+                <button type="submit" class="btn btn-lg btn-warning col-xs-6" ng-click="ui.varificationCode()" style="color: white">RE SEND</button>
+                <button type="submit" class="btn btn-lg btn-primary col-xs-6" ng-click="ui.saveAppointmentDetail()" style="color: white">SUBMIT</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fab-container">
+    <a class="fab fab-lg fab-primary" ng-show="ui.backButtonMode === 'IDEAL' || ui.backButtonMode === 'SELECTED'" ng-click="ui.backToClientMain();"><i class="glyphicon glyphicon-arrow-left"></i></a>
+</div>
+<div class="col-xs-12" style="padding-top: 30px;" ng-show="ui.modee === 'SUCCESS'">
+    <!--<h4>Your Appointment No is</h4>-->
+    <center>
+        <h3>Appointment Save Successfully</h3>
+        <i class="fa fa-medkit" style="font-size: 22px;margin-top:10px;color: black ; ">&nbsp;Your No</i>
+        <div>
+            <a class="zoom-fab zoom-btn-large" style="font-size: 40px">{{model.appointmentNumbers.maxAppointmentNo}}</a>
+        </div>
+        <p style="margin-top: 20px">Please Dont DELETE verification SMS</p>
+        <b>
+            <!--<h3>{{model.verificationDetail.code}}</h3>-->
+            <h4>Please bring this SMS or CODE ( {{model.verificationDetail.code}} ) to channel</h4>
+        </b>
+
+        <h2 style="padding-bottom: 20px">Thank you</h2>
+
+    </center>
+
+    <button type="submit" class="btn btn-lg btn-warning col-xs-12" ng-click="ui.done()" style="color: white;">DONE</button>
+
+</div>

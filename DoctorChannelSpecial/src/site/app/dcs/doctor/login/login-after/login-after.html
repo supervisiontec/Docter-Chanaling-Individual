@@ -1,0 +1,50 @@
+<div class="col-lg-4" style="padding-top:5px ; margin-bottom: 20px">
+    <div class="form-group" style="padding-top: 20px">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input class="form-control" type="date" ng-model="model.appointmentDetail.date">
+            <a class="input-group-addon ui-action-popover" ><i class="fa fa-toggle-down"></i></a>
+        </div>
+    </div>
+    <div class="form-group" >
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+            <select class="form-control" ng-model="model.appointmentDetail.location">
+                <option value="{{locations.indexNo}}" ng-repeat="locations in model.locationList">
+                    {{locations.name}}
+                </option>
+            </select>   
+            <a class="input-group-addon ui-action-popover" ><i class="fa fa-question-circle"></i></a>
+        </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+        <button type="submit" class="btn btn-lg col-xs-6" ng-click="ui.ChangeUI();" style="background-color: #00ace6; color: white">CREATE</button>
+        <button type="submit" class="btn btn-lg col-xs-6" ng-click="ui.goToChannelUI()" style="background-color: #007399; color: white">UPDATE</button>
+    </div>
+
+    <div ng-show="ui.mode === 'CREATE'">
+        <div class="col-xs-6" style="background-color: #009688;height: 52px; margin-bottom: 10px; margin-top: 10px">
+            <div class="input-group" style="margin-top: 8px">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input id="doctor-input" class="form-control" ng-model="model.appointment.date" placeholder="Date" type="text" disabled>
+            </div>
+        </div>
+        <div class="col-xs-6" style="background-color: #009688;height: 52px; margin-bottom: 10px; margin-top: 10px ">
+            <div class="input-group" style="margin-top: 8px">
+                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                <input id="doctor-input" class="form-control" ng-model="model.appointment.location" placeholder="Location" type="text" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                <input class="form-control" type="time"  ng-model="model.appointmentDetail.startTime">            
+                <a class="input-group-addon ui-action-popover" ><i class="fa fa-question-circle"></i></a>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-lg btn-block" ng-click="model.saveAppointment();" style="background-color: #007399; color: white">CREATE APPOINTMENT</button>
+
+    </div>
+</div>
+

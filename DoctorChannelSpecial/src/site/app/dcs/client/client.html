@@ -1,0 +1,80 @@
+<div class="col-lg-4" style="height: calc(100vh-100px)">
+    <div class="form-group" style="padding-top: 20px">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input class="form-control" type="date" ng-model="model.appointmentDetail.date" ng-disabled="true">
+            <a class="input-group-addon ui-action-popover" ><i class="fa fa-toggle-down"></i></a>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-dot-circle-o"></i></span>
+            <input class="form-control" type="text" ng-model="model.appointmentDetail.category" ng-disabled="true">
+            <a class="input-group-addon ui-action-popover" ><i class="fa fa-question-circle"></i></a>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+            <input class="form-control" type="text" ng-model="model.appointmentDetail.doctor" ng-disabled="true">    
+            <a class="input-group-addon ui-action-popover" ><i class="fa fa-question-circle"></i></a>
+        </div>
+    </div>
+    <div class="form-group" >
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+            <select class="form-control" ng-model="model.appointmentDetail.location">
+                <option value="{{locations.indexNo}}" ng-repeat="locations in model.locationList">
+                    {{locations.name}}
+                </option>
+            </select>   
+            <a class="input-group-addon ui-action-popover" ><i class="fa fa-question-circle"></i></a>
+        </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-lg btn-block" ng-click="ui.searchAppoinment()" style="background-color: #007399; color: white">SEARCH</button>
+    </div>
+    <div class="col-lg-12 col-xs-12 no-padding" ng-show="ui.mode === 'AVALABLE'">
+        <div class="col-lg-6 col-xs-6" style="background-color: #009688;height: 94px; margin-top: 10px; margin-bottom: 10px">
+            <div class="input-group" style="margin-top: 8px">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+
+                <input id="doctor-input" class="form-control" ng-model="model.appointmentDetail.startTime" placeholder="Start Time" type="text" disabled>
+
+            </div>
+            <div class="input-group" style="margin-top: 8px">
+                <span class="input-group-addon"><i class="fa fa-adn"></i></span>
+                <input id="doctor-input" class="form-control" ng-model="model.appointmentDetail.availability" placeholder="Avalability" type="text" disabled>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xs-6 form-group" >
+            <center>
+                <i class="fa fa-medkit" style="font-size: 22px;margin-top:10px ">&nbsp;Runing No</i>
+                <div>
+                    <a class="zoom-fab zoom-btn-large" style="font-size: 40px">{{model.appointmentNumbers.runningNo}}</a>
+                </div>
+            </center>
+        </div>
+        <button type="submit" class="btn btn-lg btn-block" ng-click="ui.getAppointment();" style="background-color: #007399; color: white">GET APPOINTMENT</button>
+    </div>
+    <div class="col-lg-12 col-xs-12 no-padding" ng-show="ui.mode === 'NOTAVALABLE'">
+        <center>
+            <b><h2 style="color: red"> ): Sorry, the doctor you searched is not available</h2></b>
+        </center>
+        <h3 style="padding-bottom: 20px">Please try:<br>
+            - Entering an alternative Date<br>
+            - Selecting an alternative Hospital</h3>
+
+    </div>
+    <div class="col-lg-12 col-xs-12 no-padding" ng-show="ui.mode === 'NONACTIVE'">
+        <center>
+            <b><h2 style="color: red"> ): Sorry, the doctor you searched is not active</h2></b>
+        </center>
+        <h3 style="padding-bottom: 20px">You cant booking online this moment:<br>
+            Please try after {{model.appointmentDetail.startTime | date:'hh:mm'}} <br></h3>
+
+    </div>
+</div>
+<div class="fab-container">
+    <a class="fab fab-lg fab-primary" ng-show="ui.backButtonMode === 'IDEAL' || ui.backButtonMode === 'SELECTED'" ng-click="ui.back();"><i class="glyphicon glyphicon-arrow-left"></i></a>
+</div>

@@ -1,0 +1,7 @@
+/DoctorChannelSpecial/target/
+/DoctorChannelSpecial/node_modules/
+/DoctorChannelSpecial/bower_components/
+/DoctorChannelSpecial/src/main/resources/static/
+/DoctorChannelSpecial/debug.log
+/DoctorChannelSpecial/src/main/resources/META-INF/persistence.xml
+/DoctorChannelSpecial/.idea
